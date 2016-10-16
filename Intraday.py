@@ -5,6 +5,7 @@ except:
 	from urllib.request import urlopen
 import sys
 import datetime
+import matplotlib.pyplot as plt
 
 
 url = 'https://www.google.com/finance/getprices?q=%s&i=%s&p=%sd&f=d,o,h,l,c,v'
@@ -72,9 +73,19 @@ class Intraday(object):
         with open("data.txt") as f:
             StartTime = data[0][1:11]
 
+    def createPlot(self):
+        changeList = self.priceChange(printChange=False)
+        plt.figure()
+        x_series = [i for i in range(len(changeList))]
+        y_series = changeList
+        plt.plot(x_series, y_series)
+        plt.savefig("%s.png" % self.ticker)
+
+
 if __name__ == '__main__':
     I = Intraday("GOOGL", 1800, 10, url)
     #I.printOut()
     #I.saveData()
     #I.readData()
-    I.priceChange()
+    #I.priceChange()
+    I.createPlot()
