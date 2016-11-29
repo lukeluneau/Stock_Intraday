@@ -10,7 +10,7 @@ class Below15(object):
 
 	def __init__(self, Exchange):
 		self.ExchangeName = Exchange[0]
-		self.Exchange = sorted(Exchange[0:])
+		self.Exchange = sorted(Exchange[1:])
 
 	def makeList(self):
 		Stock_list = []
@@ -40,4 +40,5 @@ if __name__ == '__main__':
 
 	Exchanges = [NYSE, NASDAQ, AMEX]
 	for E in Exchanges:
+		print(E)
 		print(Below15(E).makeList())
